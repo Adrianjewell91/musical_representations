@@ -109,7 +109,7 @@ Matrix Decomposition:
 
         +
 
-// ( some other matrix , 20 rows * 7 columns );
+        // ( some other matrix , 20 rows * 7 columns );
         ???????
         ???????
         ???????
