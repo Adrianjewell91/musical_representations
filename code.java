@@ -1,5 +1,5 @@
 public class Main {
-    public static int[][] analysis = {
+    private static final int[][] analysis = {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
@@ -29,7 +29,7 @@ public class Main {
         {0,0,0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0}
     };
 
-    public static int[][] passage = {
+    private static final int[][] passage = {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,1,0,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0,0,1,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 1,0,0,1,0,0,1,0,0,1,0,0, 1,0,0,1,0,0,1,0,0,1,0,0},
@@ -59,7 +59,7 @@ public class Main {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
     };
 
-    public static int[][] analyze(int[][] passage) {
+    private static int[][] analyze(int[][] passage) {
         return
                 transform(
                         filter(
@@ -68,8 +68,11 @@ public class Main {
                 );
     }
 
-    public static int[][] filter(int[][] passage) {
-        int[][] filtered = new int[20][48];
+    /*
+     * Filter the pitches for only the melody.
+     */
+    private static int[][] filter(int[][] passage) {
+        int[][] filtered = new int[passage.length][passage[0].length];
 
         for (int i = 0; i < filtered.length; i++)
         {
@@ -77,6 +80,9 @@ public class Main {
 
             for (int j = 0; j < row.length; j++)
             {
+                /*
+                 * Only collect the pitches on the downbeats.
+                 */
                 if (j == 0  ||
                     j == 3  ||
                     j == 6  ||
@@ -108,9 +114,14 @@ public class Main {
         return filtered;
     }
 
-    public static int[][] transform(int[][] passage) {
+    /*
+     * Transform the notes into a singable range.
+     *
+     * It depends on first calling filter().
+     */
+    private static int[][] transform(int[][] passage) {
         int MODULO = 5;
-        int[][] transformed = new int[20][48];
+        int[][] transformed = new int[passage.length][passage[0].length];
 
         for (int i = 0; i < transformed.length; i++)
         {
@@ -125,7 +136,7 @@ public class Main {
             }
         }
 
-        // Post process. Move One Value.
+        // Post process. Move One Value: The High D.
         transformed[19][12] = 0;
         transformed[14][12] = 1;
 
@@ -133,10 +144,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
+        /*
+         * Perform the analysis.
+         */
         int[][] result = analyze(passage);
 
-        //Print.
+        /*
+         * Print the Analysis. There is formatting logic to print according to groups of 2-3 (to match the black keys).
+         */
         int space = 0;
         int spaceExtra = 0;
 
@@ -172,7 +187,9 @@ public class Main {
             }
         }
 
-        //Validate.
+        /*
+         * Validate the Analysis.
+         */
         for (int i = 0; i < result.length; i++)
         {
             for (int j = 0; j < result[i].length; j++)
