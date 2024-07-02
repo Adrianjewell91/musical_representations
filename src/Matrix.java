@@ -14,14 +14,17 @@ public class Matrix {
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
-            {0,1,0,0,0,0,0}, // D-flat
-            {0,0,1,0,0,0,0}, // B-flat
+            {0,1,0,0,0,0,0}, // D-flat.
+            {0,0,1,0,0,0,0}, // B-flat.
             {0,0,0,0,0,0,0},
-            {0,0,0,0,1,0,0}, // G-flat
+            {0,0,0,0,1,0,0}, // G-flat.
             {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,1}  // D-flat
+            {0,0,0,0,0,0,1}  // D-flat.
     };
 
+    /*
+     *  The harmony factor is not interpretable on the basis of direct 1-1 mappings from pitch to index (in the way that the melody factor is).
+     */
     private static final int[][] harmonyFactor = {
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
@@ -37,11 +40,12 @@ public class Matrix {
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0}, // The harmony factor is not a 1-1 direct mapping with notes, in that way that melody factor is so.
-            {0,1,0,0,0,0,1},
             {0,0,0,0,0,0,0},
-            {0,0,1,0,0,0,0},
-            {0,0,0,0,1,0,0},
+            {0,1,0,0,0,0,1}, // B-flat chord tones.
+            /* ^=High    ^=Lower chord tones. */
+            {0,0,0,0,0,0,0},
+            {0,0,1,0,0,0,0}, // G-flat chord tone.
+            {0,0,0,0,1,0,0}, // E-flat chord tone.
             {0,0,0,0,0,0,0}
     };
 
@@ -56,7 +60,7 @@ public class Matrix {
         return;
     }
 
-    private static final int[][] factor =
+    private static int[][] factor =
             new int[20][7];
 //    {
 //            {0,0,0,0,0,0,0},
@@ -100,7 +104,7 @@ public class Matrix {
 
         //Sum the melody factor and the harmonic factor.
         sumMatrices();
-
+//        factor = harmonyFactor;
         //Perform matrix multiplication.
         int[][] result = analyze();
 
