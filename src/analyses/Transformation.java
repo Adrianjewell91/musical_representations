@@ -1,4 +1,11 @@
-public class Main {
+package analyses;
+
+import util.Operations;
+import util.Passage;
+import util.Printer;
+import util.Validator;
+
+public class Transformation {
     private static final int[][] analysis = {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
@@ -32,65 +39,23 @@ public class Main {
     private static int[][] analyze(int[][] passage) {
         return
                 transform(
-                        filter(
+                        Operations.filterForMelody(
                                 passage
                         )
-                );
-    }
-
-    /*
-     * Filter the pitches for only the melody.
-     */
-    private static int[][] filter(int[][] passage) {
-        int[][] filtered = new int[passage.length][passage[0].length];
-
-        for (int i = 0; i < filtered.length; i++)
-        {
-            int[] row = filtered[i];
-
-            for (int j = 0; j < row.length; j++)
-            {
-                /*
-                 * Only collect the pitches on the downbeats.
-                 */
-                if (j == 0  ||
-                    j == 3  ||
-                    j == 6  ||
-                    j == 9  ||
-                    j == 12 ||
-                    j == 15 ||
-                    j == 18 ||
-                    j == 21 ||
-                    j == 24 ||
-                    j == 27 ||
-                    j == 30 ||
-                    j == 33 ||
-                    j == 36 ||
-                    j == 39 ||
-                    j == 42 ||
-                    j == 45
-                ) {
-                    row[j] = passage[i][j];
-
-                    //Also remove the notes that aren't the melody.
-                    if (i > 1 && (passage[i-1][j] == 1 || passage[i-2][j] == 1))
-                    {
-                        row[j] = 0;
-                    }
-                }
-            }
-        }
-
-        return filtered;
+                )
+        ;
     }
 
     /*
      * Transform the notes into a singable range.
      *
      * It depends on first calling filter().
+     *
+     * This logic of getting the new range makes no sense at the moment.
      */
     private static int[][] transform(int[][] passage) {
         int MODULO = 5;
+        int RANGE_MODIFIER = passage.length - 1;
         int[][] transformed = new int[passage.length][passage[0].length];
 
         for (int i = 0; i < transformed.length; i++)
@@ -101,14 +66,21 @@ public class Main {
             {
                 // move each note down until it can't go anymore.
                 if (passage[i][j] == 1) {
-                    transformed[19 - ((19-i) % MODULO)][j] = passage[i][j];
+                    transformed[RANGE_MODIFIER - ((RANGE_MODIFIER-i) % MODULO)][j] = passage[i][j];
                 }
             }
         }
 
-        // Post process. Move One Value: The High D.
-        transformed[19][12] = 0;
-        transformed[14][12] = 1;
+        /*
+         * Post-Processing for One Pitch in the middle of the phrase: The High D.
+         */
+        int HIGH_D_TIMESTAMP = 12;
+
+        int TURN_OFF = 19;
+        transformed[TURN_OFF][HIGH_D_TIMESTAMP] = 0;
+
+        int TURN_ON = 14;
+        transformed[TURN_ON][HIGH_D_TIMESTAMP] = 1;
 
         return transformed;
     }
@@ -118,7 +90,6 @@ public class Main {
          * Perform the analysis.
          */
         int[][] result = analyze(Passage.passage);
-
         /*
          * Print the Analysis.
          */
@@ -127,18 +98,6 @@ public class Main {
         /*
          * Validate the Analysis.
          */
-        for (int i = 0; i < result.length; i++)
-        {
-            for (int j = 0; j < result[i].length; j++)
-            {
-                if (result[i][j] != analysis[i][j])
-                {
-                    System.out.println("invalid");
-                    return;
-                }
-            }
-        }
-
-        System.out.println("valid");
+        Validator.validate(result, analysis);
     }
 }

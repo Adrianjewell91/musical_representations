@@ -1,3 +1,10 @@
+package analyses;
+
+import util.Printer;
+
+import static util.Operations.dotProduct;
+import static util.Operations.sumMatrices;
+
 public class Matrix {
     private static final int[][] melodyFactor = {
             {0,0,0,0,0,0,0},
@@ -49,17 +56,6 @@ public class Matrix {
             {0,0,0,0,0,0,0}
     };
 
-    private static void sumMatrices()
-    {
-        for (int i = 0; i < harmonyFactor.length; i++) {
-            for (int j = 0; j < melodyFactor[j].length; j++) {
-                factor[i][j] = harmonyFactor[i][j] + melodyFactor[i][j];
-            }
-        }
-
-        return;
-    }
-
     private static int[][] factor =
             new int[20][7];
 //    {
@@ -101,43 +97,12 @@ public class Matrix {
         /*
          * Perform the analysis.
          */
-
-        //Sum the melody factor and the harmonic factor.
-        sumMatrices();
-//        factor = harmonyFactor;
-        //Perform matrix multiplication.
-        int[][] result = analyze();
+        factor         = sumMatrices(harmonyFactor, melodyFactor);
+        int[][] result = dotProduct(factor, analysis);
 
         /*
          * Print the Analysis.
          */
         Printer.print(result);
-    }
-
-    /*
-     * Matrix multiplication (dot product)
-     */
-    private static int[][] analyze() {
-        int[][] result = new int[20][48];
-
-        // for each row in factor
-        for (int i = 0; i < factor.length; i++)
-        {
-            // for each col in analysis.
-            for (int k = 0; k < analysis[0].length; k++)
-            {
-                int sum = 0;
-                for (int j = 0; j < factor[0].length; j++)
-                {
-
-                    sum += ( factor[i][j] * analysis[j][k] );
-
-                }
-
-                result[i][k] = sum;
-            }
-        }
-
-        return result;
     }
 }

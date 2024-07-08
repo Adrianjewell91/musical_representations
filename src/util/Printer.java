@@ -1,7 +1,9 @@
+package util;
+
 public class Printer {
     public static void print(int[][] result) {
         /*
-         * Print the Analysis. This is formatting logic to print according to groups of 2-3 (to match the black keys).
+         * Print the Analysis. There is formatting logic to print according to groups of 2-3 (to match the black keys).
          */
         int space = 0;
         int spaceExtra = 0;
