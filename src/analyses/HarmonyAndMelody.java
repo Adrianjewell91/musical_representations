@@ -6,9 +6,10 @@ import util.Printer;
 import util.Validator;
 
 import static util.Operations.filterForHarmony;
+import static util.Operations.sumMatrices;
 
 public class HarmonyAndMelody {
-    private static final int[][] harmonyOnly = {
+    private static final int[][] expected = {
             {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,1,0,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0,0,1,0,0},
@@ -42,15 +43,24 @@ public class HarmonyAndMelody {
         /*
          * Perform the analysis.
          */
-        int[][] result = filterForHarmony(Operations.filterForMelody(Passage.passage), Passage.passage);
+        int[][] melody = Operations.filterForMelody(Passage.passage);
+        int[][] harmony = filterForHarmony(melody, Passage.passage);
+
         /*
          * Print the Analysis.
          */
-        Printer.print(result);
+        Printer.print(harmony);
 
         /*
          * Validate the Analysis.
          */
-        Validator.validate(result, harmonyOnly);
+        Validator.validate(harmony, expected);
+
+        /*
+         * Validate that the summing the melody and harmony returns to the passage.
+         *
+         * Actually, I found a bug by writing this test even though it worked for the other use case.
+         */
+        Validator.validate(sumMatrices(harmony, melody), Passage.passage);
     }
 }

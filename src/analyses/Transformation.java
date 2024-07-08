@@ -6,7 +6,7 @@ import util.Printer;
 import util.Validator;
 
 public class Transformation {
-    private static final int[][] analysis = {
+    private static final int[][] expected = {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
@@ -98,6 +98,6 @@ public class Transformation {
         /*
          * Validate the Analysis.
          */
-        Validator.validate(result, analysis);
+        Validator.validate(result, expected);
     }
 }
