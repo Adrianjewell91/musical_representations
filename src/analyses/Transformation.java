@@ -6,6 +6,9 @@ import util.Printer;
 import util.Validator;
 
 public class Transformation {
+    /*
+     * This is very similar to the "analysis" variable, except that it retains the same shape as the passage.
+     */
     private static final int[][] expected = {
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
