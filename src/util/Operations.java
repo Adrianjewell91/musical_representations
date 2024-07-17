@@ -67,7 +67,7 @@ public class Operations {
     }
 
     /*
-     * Filters a melody from a passage.
+     * Filters out a melody from a passage.
      *
      * It uses the XOR operator to return only the harmony from a passage
      */

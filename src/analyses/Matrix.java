@@ -1,60 +1,12 @@
 package analyses;
 
+import util.Passage;
 import util.Printer;
 
 import static util.Operations.dotProduct;
 import static util.Operations.sumMatrices;
 
 public class Matrix {
-    private static final int[][] melodyFactor = {
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,1,0,0,0,0,0}, // D-flat.
-            {0,0,1,0,0,0,0}, // B-flat.
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,1,0,0}, // G-flat.
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,1}  // D-flat.
-    };
-
-    /*
-     *  The harmony factor is not interpretable on the basis of direct 1-1 mappings from pitch to index (in the way that the melody factor is).
-     */
-    private static final int[][] harmonyFactor = {
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0},
-            {0,1,0,0,0,0,1}, // B-flat chord tones.
-            /* ^=High    ^=Lower chord tones. */
-            {0,0,0,0,0,0,0},
-            {0,0,1,0,0,0,0}, // G-flat chord tone.
-            {0,0,0,0,1,0,0}, // E-flat chord tone.
-            {0,0,0,0,0,0,0}
-    };
 
     private static int[][] factor =
             new int[20][7];
@@ -81,24 +33,12 @@ public class Matrix {
 //            {0,0,0,0,0,0,1}  // corresponds to a D-flat. it will produce the other correct subset of D-flats in the analysis.
 //    };
 
-    private static final int[][] analysis = {
-        {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
-
-        {1,0,0,0,0,0,0,0,0,1,0,0, 0,0,0,0,0,0,1,0,0,0,0,0, 0,0,0,1,0,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0,0,1,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,1,0,0,0,0,0, 0,0,0,1,0,0,0,0,0,0,0,0, 1,0,0,0,0,0,1,0,0,0,0,0, 1,0,0,0,0,0,1,0,0,0,0,0},
-
-        {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,1,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,1,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0}
-    };
-
     public static void main(String[] args) {
         /*
          * Perform the analysis.
          */
-        factor         = sumMatrices(harmonyFactor, melodyFactor);
-        int[][] result = dotProduct(factor, analysis);
+        factor         = sumMatrices(Passage.harmonyFactor, Passage.melodyFactor);
+        int[][] result = dotProduct(factor, Passage.analysis);
 
         /*
          * Print the Analysis.
