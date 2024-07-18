@@ -1,4 +1,4 @@
-package analyses.matrix;
+package analyses.matrix_multiplication;
 
 import util.Passage;
 import util.Printer;
@@ -8,7 +8,6 @@ import static util.Operations.dotProduct;
 import static util.Operations.sumMatrices;
 
 public class Melody {
-
     public static void main(String[] args) {
         /*
          * Perform the analysis:

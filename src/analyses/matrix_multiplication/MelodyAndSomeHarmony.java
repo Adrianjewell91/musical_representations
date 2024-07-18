@@ -1,4 +1,4 @@
-package analyses.matrix;
+package analyses.matrix_multiplication;
 
 import util.Passage;
 import util.Printer;
@@ -6,8 +6,7 @@ import util.Printer;
 import static util.Operations.dotProduct;
 import static util.Operations.sumMatrices;
 
-public class SomeHarmonyAndMelody {
-
+public class MelodyAndSomeHarmony {
     private static int[][] factor =
             new int[20][7];
 //    {

@@ -6,6 +6,22 @@ import util.Printer;
 import util.Validator;
 
 public class HardCoded {
+    public static void main(String[] args) {
+        /*
+         * Perform the analysis.
+         */
+        int[][] result = analyze(Passage.passage);
+        /*
+         * Print the Analysis.
+         */
+        Printer.print(result);
+
+        /*
+         * Validate the Analysis.
+         */
+        Validator.validate(result, Passage.analysisFullDimensions);
+    }
+
     private static int[][] analyze(int[][] passage) {
         return
                 transform(
@@ -13,7 +29,7 @@ public class HardCoded {
                                 passage
                         )
                 )
-        ;
+                ;
     }
 
     /*
@@ -42,6 +58,8 @@ public class HardCoded {
         }
 
         /*
+         * Hard Coded,
+         *
          * Post-Processing for One Pitch in the middle of the phrase: The High D.
          */
         int HIGH_D_TIMESTAMP = 12;
@@ -55,19 +73,4 @@ public class HardCoded {
         return transformed;
     }
 
-    public static void main(String[] args) {
-        /*
-         * Perform the analysis.
-         */
-        int[][] result = analyze(Passage.passage);
-        /*
-         * Print the Analysis.
-         */
-        Printer.print(result);
-
-        /*
-         * Validate the Analysis.
-         */
-        Validator.validate(result, Passage.analysisFullDimensions);
-    }
 }
