@@ -32,6 +32,9 @@ public class MelodyAndSomeHarmony {
 //            {0,0,0,0,0,0,1}  // corresponds to a D-flat. it will produce the other correct subset of D-flats in the analysis.
 //    };
 
+    /*
+     * This one is kind of a mess right now.
+     */
     public static void main(String[] args) {
         /*
          * Perform the analysis.
@@ -42,7 +45,7 @@ public class MelodyAndSomeHarmony {
         /*
          * Print the Analysis.
          */
-//        Printer.print(result);
+        Printer.print(result);
         System.out.println("valid");
     }
 }

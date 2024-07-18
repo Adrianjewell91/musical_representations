@@ -85,7 +85,8 @@ public class Passage {
     };
 
     /*
-     *  The harmony factor is not interpretable on the basis of direct 1-1 mappings from pitch to index (in the way that the melody factor is).
+     *  The harmony factor is not interpretable on the basis of
+     *  direct 1-1 mappings from pitch to index.
      */
     public static final int[][] harmonyFactor = {
             {0,0,0,0,0,0,0},
