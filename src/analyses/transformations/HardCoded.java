@@ -1,11 +1,11 @@
-package analyses;
+package analyses.transformations;
 
 import util.Operations;
 import util.Passage;
 import util.Printer;
 import util.Validator;
 
-public class Transformation {
+public class HardCoded {
     private static int[][] analyze(int[][] passage) {
         return
                 transform(

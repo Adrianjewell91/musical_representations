@@ -1,4 +1,4 @@
-package analyses;
+package analyses.transformations;
 
 import util.Operations;
 import util.Passage;

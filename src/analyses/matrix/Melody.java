@@ -1,4 +1,4 @@
-package analyses;
+package analyses.matrix;
 
 import util.Passage;
 import util.Printer;
@@ -7,7 +7,7 @@ import util.Validator;
 import static util.Operations.dotProduct;
 import static util.Operations.sumMatrices;
 
-public class MatrixMelodyOnly {
+public class Melody {
 
     public static void main(String[] args) {
         /*
