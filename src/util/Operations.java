@@ -86,6 +86,26 @@ public class Operations {
         return harmony;
     }
 
+    /*
+     * Filters out a melody from a passage.
+     *
+     * It uses the XOR operator to return only the harmony from a passage
+     */
+    public static int[][] AndOperator(int[][] melody, int[][] passage) {
+        int[][] harmony = new int[passage.length][passage[0].length];
+
+        for (int i = 0; i < harmony.length; i++)
+        {
+            for (int j = 0; j < harmony[0].length; j++)
+            {
+                harmony[i][j] = melody[i][j] & passage[i][j];
+            }
+
+        }
+
+        return harmony;
+    }
+
 
     /*
      * Filter the pitches for only the melody.
@@ -131,5 +151,43 @@ public class Operations {
         }
 
         return filtered;
+    }
+
+    public static int[][] ascendPitches(int[][] matrix) {
+        Integer prev = null;
+        int OCTAVE_UP = 5;
+
+        for (int i = 0; i < matrix[0].length; i++)
+        {
+            for (int j = 0; j < matrix.length; j++)
+            {
+                if (matrix[j][i] == 1 && prev == null)
+                {
+                    prev = j;
+                }
+                else if (matrix[j][i] == 1)
+                {
+                    int current = j;
+                    while (current > prev)
+                    {
+                        current -= OCTAVE_UP;
+                    }
+
+                    if (current < 0)
+                    {
+                        current += OCTAVE_UP;
+                    }
+
+                    matrix[j][i] = 0;
+                    matrix[current][i] = 1;
+
+                    prev = current;
+                }
+            }
+        }
+
+
+
+        return matrix;
     }
 }
