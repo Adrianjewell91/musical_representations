@@ -21,7 +21,7 @@ public class Melody {
         /*
          * Print the Analysis.
          */
-        Printer.print(result);
+//        Printer.print(result);
 
         /*
          * Validate the melody + harmony == passage.

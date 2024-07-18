@@ -14,7 +14,7 @@ public class HardCoded {
         /*
          * Print the Analysis.
          */
-        Printer.print(result);
+//        Printer.print(result);
 
         /*
          * Validate the Analysis.

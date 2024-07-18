@@ -19,7 +19,7 @@ public class HarmonyAndMelody {
         /*
          * Print the Analysis.
          */
-        Printer.print(harmony);
+//        Printer.print(harmony);
 
         /*
          * Validate the Analysis.
