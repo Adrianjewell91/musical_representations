@@ -57,15 +57,18 @@ public class Contextual {
 
   private static void harmonic() {
     for (int i = 0; i < harmonies.length; i++) {
-      if (harmonies[i].equals("F")) {
+      if (harmonies[i].equals("F"))
+      {
         System.out.println(NEIGHBOR);
       }
 
-      if (harmonies[i].equals("Fadd9")) {
+      if (harmonies[i].equals("Fadd9"))
+      {
         System.out.println(ARPEGGIATION);
       }
 
-      if (harmonies[i].equals("Bflatadd9")) {
+      if (harmonies[i].equals("Bflatadd9"))
+      {
         System.out.println(TENUTO);
       }
     }

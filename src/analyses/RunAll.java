@@ -6,13 +6,18 @@ import analyses.matrix_multiplication.MelodyAndSomeHarmony;
 import analyses.transformations.HardCoded;
 import analyses.transformations.HarmonyAndMelody;
 
-import java.util.stream.Collectors;
-
 public class RunAll {
     public static void main(String[] args) {
+        /*
+        Matrix
+         */
         Melody.main(new String[] {});
         MelodyAndFleshOut.main(new String[] {});
         MelodyAndSomeHarmony.main(new String[] {});
+
+        /*
+        Transformation
+         */
         HardCoded.main(new String[] {});
         HarmonyAndMelody.main(new String[] {});
     }
