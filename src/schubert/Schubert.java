@@ -103,9 +103,7 @@ public class Schubert {
 
     // take the min and reduce min times?
 
-    // use the key algorithm, which probably counts pitches etc.
+    // use the musical key algorithm, which probably accounts for frequency etc.
     return pitchCount;
   }
-
-
 }
