@@ -2,9 +2,24 @@ package schubert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Schubert {
+  private static Map<Integer, String> pitches = Map.of(
+       8, "Eflat",
+       10, "F",
+       0, "G",
+       1, "Aflat",
+       3, "Bflat",
+       5, "C",
+       7, "D",
+       // Non scale tones:
+       9, "Enat",
+       11, "Fsharp"
+  );
 
   // Nine bars: eight plus pick-up.
   // Divided by voice.
@@ -28,6 +43,22 @@ public class Schubert {
 
     System.out.println("divisions should be 9, 27, 45, 72: ");
     System.out.println(Arrays.toString(segment(passage)));
+
+    System.out.println("scale Eflat, it is a 7 tone scale with trace usages of passing tones:");
+    System.out.print(scale(passage));
+    Map<Integer,Integer> map = scale(passage);
+    System.out.println(
+        map.entrySet()
+           .stream()
+           .collect(
+               Collectors.toMap(
+                   e -> pitches.get(e.getKey()),
+                   e -> e.getValue()
+               )
+           )
+    );
+
+
   }
 
   // Chords
@@ -56,5 +87,25 @@ public class Schubert {
 
     return divisions;
   }
+
+  public static Map<Integer, Integer> scale(int [][] passage)
+  {
+    Map<Integer, Integer> pitchCount = new HashMap<>();
+
+    for (int[] ints : passage) {
+      for (int anInt : ints) {
+        if (anInt != 0)
+        {
+          pitchCount.put(anInt % 12, pitchCount.getOrDefault(anInt % 12, 0) + 1);
+        }
+      }
+    }
+
+    // take the min and reduce min times?
+
+    // use the key algorithm, which probably counts pitches etc.
+    return pitchCount;
+  }
+
 
 }
