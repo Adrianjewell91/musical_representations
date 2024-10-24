@@ -58,7 +58,7 @@ public class Schubert {
            )
     );
 
-
+    voiceExchange(passage);
   }
 
   // Chords
@@ -67,9 +67,9 @@ public class Schubert {
   // Melody decomposition
 
   /*
-   * At each E flat, divide the passage.
+   * At each E flat on the downbeat, divide the passage.
    */
-  public static int[] segment(int[][] passage)
+  private static int[] segment(int[][] passage)
   {
     int[] divisions = new int[4];
 
@@ -88,7 +88,8 @@ public class Schubert {
     return divisions;
   }
 
-  public static Map<Integer, Integer> scale(int [][] passage)
+  // count the pitches and asses them.
+  private static Map<Integer, Integer> scale(int [][] passage)
   {
     Map<Integer, Integer> pitchCount = new HashMap<>();
 
@@ -106,4 +107,48 @@ public class Schubert {
     // use the musical key algorithm, which probably accounts for frequency etc.
     return pitchCount;
   }
+
+
+  // voice exchange: find transformation of a major tenth to a major sixth and back again.
+  private static int[] voiceExchange(int[][] passage)
+  {
+    int[] segments = segment(passage);
+
+    int[] rootVoices = new int[3];
+
+    int i = 0;
+    for (int segmentation: segments)
+    {
+      if (passage[0][segmentation] % 12 == 8)
+      {
+        rootVoices[i] = 0;
+        i++;
+
+        if (passage[2][segmentation] % 12 != 0)
+        {
+          throw new RuntimeException("Not a voice exchange");
+        }
+      }
+
+      else if (passage[2][segmentation] % 12 == 8)
+      {
+        rootVoices[i] = 2;
+        i++;
+
+        if (passage[0][segmentation] % 12 != 0)
+        {
+          throw new RuntimeException("Not a voice exchange");
+        }
+      }
+
+      if (i > 2)
+      {
+        break;
+      }
+    }
+
+    return rootVoices;
+  }
+
+  // melodic decomposition: chord tones begin and end the motif.
 }
