@@ -57,8 +57,8 @@ public class Schubert {
            )
     );
 
+    // This analyses uses the concept of error throwing to validate the voice exchange.
     voiceExchange(passage);
-
 
     System.out.println(Arrays.toString(melodicGroupings(passage)));
   }
