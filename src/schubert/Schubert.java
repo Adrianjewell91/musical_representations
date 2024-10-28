@@ -1,6 +1,5 @@
 package schubert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +58,9 @@ public class Schubert {
     );
 
     voiceExchange(passage);
+
+
+    System.out.println(Arrays.toString(melodicGroupings(passage)));
   }
 
   // Chords
@@ -110,7 +112,7 @@ public class Schubert {
 
 
   // voice exchange: find transformation of a major tenth to a major sixth and back again.
-  private static int[] voiceExchange(int[][] passage)
+  private static void voiceExchange(int[][] passage)
   {
     int[] segments = segment(passage);
 
@@ -147,8 +149,53 @@ public class Schubert {
       }
     }
 
-    return rootVoices;
   }
 
-  // melodic decomposition: chord tones begin and end the motif.
+  // melodic groupings: chord tones begin and end the motif.
+  private static String[] melodicGroupings(int[][] passage)
+  {
+    Map<List<Integer>, String> chords = Map.of(List.of(1,5,8), "IV", List.of(3, 7, 10), "V", List.of(8, 12, 3), "I");
+
+    int[] group1 = new int[] { passage[0][6]  % 12, passage[0][14] % 12 };
+    int[] group2 = new int[] { passage[0][15] % 12, passage[0][17] % 12 };
+    int[] group3 = new int[] { passage[0][18] % 12, passage[0][21] % 12 };
+    int[] group4 = new int[] { passage[0][22] % 12, passage[0][26] % 12 };
+
+    int[][] groups = new int[][] { group1, group2, group3, group4 };
+
+    // For each group return greatest match with the chord.
+    int i = 0;
+    String[] groupNames = new String[groups.length];
+
+    for (int[] group: groups)
+    {
+      int maxCount = 0;
+      String bestChord = "";
+
+      for (Map.Entry<List<Integer>, String> entry: chords.entrySet())
+      {
+        int count = 0;
+        String chord = entry.getValue();
+        for (int pitch : group)
+        {
+          if (entry.getKey().contains(pitch))
+          {
+            count++;
+          }
+        }
+
+        if (count >= maxCount) {
+          bestChord = chord;
+        }
+        maxCount = Math.max(maxCount, count);
+
+      }
+
+      groupNames[i] = bestChord;
+      i++;
+    }
+
+    return groupNames;
+  }
+
 }
