@@ -1,6 +1,9 @@
-package util;
+package analyses.util;
 
 public class Passage {
+    /*
+    This is the Chopin G flat etude, final ascending two-handed arpeggiation of G flat, before the cadence.
+     */
     public static final int[][] passage = {
             {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,1,0,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0,0,1,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0},

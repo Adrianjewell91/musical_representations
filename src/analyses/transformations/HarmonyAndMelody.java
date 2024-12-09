@@ -1,12 +1,11 @@
 package analyses.transformations;
 
-import util.Operations;
-import util.Passage;
-import util.Printer;
-import util.Validator;
+import analyses.util.Operations;
+import analyses.util.Passage;
+import analyses.util.Validator;
 
-import static util.Operations.filterForHarmony;
-import static util.Operations.sumMatrices;
+import static analyses.util.Operations.filterForHarmony;
+import static analyses.util.Operations.sumMatrices;
 
 public class HarmonyAndMelody {
     public static void main(String[] args) {

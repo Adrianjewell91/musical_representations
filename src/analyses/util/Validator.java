@@ -1,4 +1,4 @@
-package util;
+package analyses.util;
 
 public class Validator {
     public static void validate(int[][] result, int[][] expected) {

@@ -1,10 +1,10 @@
 package analyses.matrix_multiplication;
 
-import util.Passage;
-import util.Printer;
+import analyses.util.Passage;
+import analyses.util.Printer;
 
-import static util.Operations.dotProduct;
-import static util.Operations.sumMatrices;
+import static analyses.util.Operations.dotProduct;
+import static analyses.util.Operations.sumMatrices;
 
 public class MelodyAndSomeHarmony {
     private static int[][] factor =

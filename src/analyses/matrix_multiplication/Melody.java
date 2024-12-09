@@ -1,11 +1,11 @@
 package analyses.matrix_multiplication;
 
-import util.Operations;
-import util.Passage;
-import util.Validator;
+import analyses.util.Operations;
+import analyses.util.Passage;
+import analyses.util.Validator;
 
-import static util.Operations.dotProduct;
-import static util.Operations.sumMatrices;
+import static analyses.util.Operations.dotProduct;
+import static analyses.util.Operations.sumMatrices;
 
 public class Melody {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package util;
+package analyses.util;
 
 public class Printer {
     public static void print(int[][] result) {

@@ -1,11 +1,10 @@
 package analyses.matrix_multiplication;
 
-import util.Operations;
-import util.Passage;
-import util.Printer;
-import util.Validator;
+import analyses.util.Operations;
+import analyses.util.Passage;
+import analyses.util.Validator;
 
-import static util.Operations.*;
+import static analyses.util.Operations.*;
 
 public class MelodyAndFleshOut {
     public static void main(String[] args) {
